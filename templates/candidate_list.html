@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candidate List</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='icon/icon.ico') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Candidate List</h1>
+        <table>
+            <tr>
+                <th>Candidate ID</th>
+                <th>Name</th>
+                <th>Party Name</th>
+                <th>Actions</th>
+            </tr>
+            {% for candidate in candidates %}
+                <tr>
+                    <td>{{ candidate.candidate_id }}</td>
+                    <td>{{ candidate.name }}</td>
+                    <td>{{ candidate.party_name }}</td>
+                    <td>
+                        <a href="{{ url_for('edit_candidate', id=candidate.id) }}">Edit</a>
+                        <a href="{{ url_for('delete_candidate', id=candidate.id) }}">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>

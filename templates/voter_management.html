@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voter Management</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='icon/icon.ico') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Voter Management</h1>
+        <a href="{{ url_for('add_voter') }}"><button class="btn-gradient-green">Add Voter</button></a>
+        <a href="{{ url_for('voter_list') }}"><button class="btn-gradient-blue">Voter List</button></a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Election Management</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='icon/icon.ico') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        /* Styles for the Past Elections Table Only */
+        .past-elections-table {
+            width: 90%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #1e1e1e;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+        
+        .past-elections-table th,
+        .past-elections-table td {
+            border: 1px solid #333;
+            padding: 12px 16px;
+            text-align: left;
+        }
+        
+        .past-elections-table th {
+            background-color: #2c2c2c;
+            color: #f0f0f0;
+        }
+        
+        .past-elections-table td {
+            background-color: #1e1e1e;
+            color: #ccc;
+        }
+        
+        .past-elections-table a {
+            color: #00bcd4;
+            text-decoration: none;
+        }
+        
+        .past-elections-table a:hover {
+            text-decoration: underline;
+        }
+        .tabl{
+            width:100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        </style>
+        
+</head>
+<body>
+    <div class="container">
+        <h1>Election Management</h1>
+        <a href="{{ url_for('fix_election') }}"><button  class="btn-gradient-green">Fix Election</button></a>
+        <a href="{{ url_for('force_stop') }}"><button class="btn-gradient-red">Force Stop</button></a>
+    </div>
+    <div class="tabl">
+        <h2>Past Elections</h2>
+<table class="past-elections-table" >
+        <thead>
+            <tr>
+                <th>Start</th>
+                <th>End</th>
+                <th>Status</th>
+                <th>View Results</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for election in elections %}
+            <tr>
+                <td>{{ election.start_time.strftime('%Y-%m-%d') }}</td>
+                <td>{{ election.end_time.strftime('%Y-%m-%d') }}</td>
+                <td>
+                    {% if election.election_going %}
+                        <span style="color: limegreen;">Ongoing</span>
+                    {% else %}
+                        <span style="color: gray;">Ended</span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if not election.election_going %}
+                        <a href="{{ url_for('view_election_results', election_id=election.id) }}">View Results</a>
+                    {% else %}
+                        <em>Not yet available</em>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody> 
+</table>
+</div>
+</body>
+</html>

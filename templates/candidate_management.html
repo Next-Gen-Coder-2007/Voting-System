@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candidate Management</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='icon/icon.ico') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Candidate Management</h1>
+        <a href="{{ url_for('add_candidate') }}"><button  class="btn-gradient-green">Add Candidate</button></a>
+        <a href="{{ url_for('candidate_list') }}"><button class="btn-gradient-red">Candidate List</button></a>
+    </div>
+</body>
+</html>

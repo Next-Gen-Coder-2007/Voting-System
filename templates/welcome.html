@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='icon/icon.ico') }}" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome</h1>
+        <a href="{{ url_for('admin_login') }}"><button class="btn-gradient-red">Admin Login</button></a>
+        <a href="{{ url_for('voter_login') }}"><button class="btn-gradient-green">Voter Login</button></a>
+        <a href="{{ url_for('results') }}"><button class="btn-gradient-blue">Real Time Results</button></a>
+    </div>
+</body>
+</html>

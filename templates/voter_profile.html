@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="shortcut icon" href="{{ url_for('static', filename='icon/icon.ico') }}" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Voter Profile</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #0f0f0f, #1c1c1c);
+      color: #f1f1f1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 30px;
+      min-height: 100vh;
+    }
+
+    .profile-container {
+      background: #1e1e2f;
+      border-radius: 12px;
+      padding: 30px;
+      width: 100%;
+      max-width: 1000px;
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.05);
+    }
+
+    .profile-header {
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .profile-photo img {
+      width: 180px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 5px solid #9c27b0;
+      background-color: #2c2c2c;
+    }
+
+    .profile-title {
+      font-size: 28px;
+      font-weight: 600;
+      color: #eaeaea;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #2a2a40;
+      margin-top: 10px;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 14px 18px;
+      border-bottom: 1px solid #444;
+    }
+
+    th {
+      background-color: #3b3b5c;
+      color: #f1f1f1;
+      font-weight: 600;
+    }
+
+    td {
+      background-color: #252538;
+      color: #d0d0d0;
+    }
+
+    .vote-button {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 12px 24px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #fff;
+      background: linear-gradient(to right, #00c853, #64dd17);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      position: relative;
+      left: 43%;
+      top:-2vh;
+    }
+
+    .vote-button:hover {
+      background: linear-gradient(to left, #00e676, #76ff03);
+    }
+
+    @media (max-width: 768px) {
+      .profile-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .profile-photo img {
+        width: 140px;
+        height: 140px;
+      }
+
+      .profile-title {
+        font-size: 22px;
+      }
+
+      th, td {
+        font-size: 14px;
+        padding: 10px;
+      }
+    }
+    /* Election alert box styles */
+    .alert {
+            padding: 16px 24px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 500;
+            text-align: center;
+            margin: 20px auto;
+            width: 80%;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* Ongoing election alert */
+        .alert-success {
+            background: linear-gradient(135deg, #00c6ff, #0072ff);
+            color: white;
+            border-left: 5px solid #00c6ff;
+        }
+
+        /* No election alert */
+        .alert-warning {
+            background: linear-gradient(135deg, #ff416c, #ff4b2b);
+            color: white;
+            border-left: 5px solid #ff416c;
+        }
+  </style>
+</head>
+<body>
+  <div class="profile-container">
+    <div class="profile-header">
+      <div class="profile-photo">
+        <img src="{{ url_for('static', filename='uploads/' + voter.photo) }}" alt="Voter Photo">
+      </div>
+      <div class="profile-title">
+        {{ voter.name }}'s Profile
+      </div>
+    </div>
+
+    <table>
+      <tr>
+        <th>Username</th>
+        <td>{{ voter.username }}</td>
+      </tr>
+      <tr>
+        <th>Date of Birth</th>
+        <td>{{ voter.dob }}</td>
+      </tr>
+      <tr>
+        <th>Age</th>
+        <td>{{ voter.age }}</td>
+      </tr>
+      <tr>
+        <th>Email</th>
+        <td>{{ voter.email }}</td>
+      </tr>
+      <tr>
+        <th>Phone Number</th>
+        <td>{{ voter.phone_no }}</td>
+      </tr>
+      <tr>
+        <th>Gender</th>
+        <td>{{ voter.gender }}</td>
+      </tr>
+      <tr>
+        <th>Address</th>
+        <td>{{ voter.address_lane1 }}, {{ voter.address_lane2 }}</td>
+      </tr>
+      <tr>
+        <th>District</th>
+        <td>{{ voter.district }}</td>
+      </tr>
+      <tr>
+        <th>State</th>
+        <td>{{ voter.state }}</td>
+      </tr>
+    </table>
+        {% if election %}
+            <div class="alert alert-success">
+                Election is Active: {{ election.start_time.strftime('%Y-%m-%d %H:%M') }} to {{ election.end_time.strftime('%Y-%m-%d %H:%M') }}
+            </div>
+            {% if not voter.has_voted %}
+                    <a href="{{ url_for('voter_dashboard') }}"><button class="vote-button">Vote Now</button>
+            {% else %}
+                <p style="background-color: red; width: fit-content;padding: 10px 20px;color: white;border-radius: 20px;position: relative;left:20vw">You have already voted in this election.</p>
+            {% endif %}
+        {% else %}
+            <div class="alert alert-warning">
+                No Active Election
+            </div>
+        {% endif %}
+  </div>
+</body>
+</html>

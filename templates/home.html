@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voting System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #111;
+    color: #eee;
+    padding: 30px;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    background: #1e1e1e;
+    padding: 40px;
+    border-radius: 14px;
+    box-shadow: 0 0 20px rgba(255, 140, 0, 0.3);
+    text-align: center;
+}
+
+h1 {
+    color: #ff8c00;
+    margin-bottom: 15px;
+}
+
+.project-info {
+    margin: 30px 0;
+    text-align: left;
+}
+
+.project-info h2 {
+    color: #ff8c00;
+    margin-bottom: 10px;
+}
+
+.project-info ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+
+
+.btn-gradient-orange {
+    background: linear-gradient(45deg, #ff8c00, #ff5e00);
+    color: white;
+    padding: 12px 26px;
+    border: none;
+    border-radius: 30px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 0 12px rgba(255, 94, 0, 0.5);
+}
+
+.btn-gradient-orange:hover {
+    background: linear-gradient(45deg, #ff5e00, #ff8c00);
+    box-shadow: 0 0 20px rgba(255, 94, 0, 0.7);
+}
+
+footer {
+    margin-top: 50px;
+    padding: 20px;
+    background-color: #222;
+    border-radius: 12px;
+    text-align: center;
+    color: #bbb;
+}
+
+footer p {
+    margin-bottom: 10px;
+}
+
+footer .social-links a {
+    color: #ff8c00;
+    margin: 0 12px;
+    font-size: 1.5rem;
+    transition: 0.3s ease;
+}
+
+footer .social-links a:hover {
+    color: #fff;
+}
+
+@media screen and (max-width: 600px) {
+    .container {
+        padding: 20px;
+    }
+
+    .btn-gradient-orange {
+        width: 100%;
+    }
+
+    .project-info {
+        text-align: center;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to the Voting System</h1>
+        <p>This is a secure and user-friendly online voting system built using Python and Flask.</p>
+
+        <div class="project-info">
+            <h2>Key Features</h2>
+            <ul>
+                <li>Secure Admin & Voter Login</li>
+                <li>Register, View Profile & Vote</li>
+                <li>Live Election Result Display</li>
+            </ul>
+        </div>
+
+        <p>Built by Subash B (Full Stack Developer)</p>
+
+        <a href="{{ url_for('welcome') }}"><button class="btn-gradient-orange">Get Started</button></a>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Subash B | Contact: 9442059245 | Email: subash59245@gmail.com</p>
+        <div class="social-links">
+            <a href="https://www.linkedin.com/in/subash-baskaran-80574b326/" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://www.instagram.com/subash_8776" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://github.com/Next-Gen-Coder-2007" target="_blank"><i class="fab fa-github"></i></a>
+        </div>
+    </footer>
+</body>
+</html>

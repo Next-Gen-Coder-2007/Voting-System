@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='icon/icon.ico') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+            .alert {
+            padding: 16px 24px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 500;
+            text-align: center;
+            margin: 20px auto;
+            width: 80%;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* Ongoing election alert */
+        .alert-success {
+            background: linear-gradient(135deg, #00c6ff, #0072ff);
+            color: white;
+            border-left: 5px solid #00c6ff;
+        }
+
+        /* No election alert */
+        .alert-warning {
+            background: linear-gradient(135deg, #ff416c, #ff4b2b);
+            color: white;
+            border-left: 5px solid #ff416c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Admin Dashboard</h1>
+        <a href="{{ url_for('voter_management') }}"><button class="btn-gradient-red">Voter Management</button></a>
+        <a href="{{ url_for('candidate_management') }}"><button class="btn-gradient-green">Candidate Management</button></a>
+        <a href="{{ url_for('election_management') }}"><button class="btn-gradient-blue">Election Management</button></a>
+    </div>
+    {% if election %}
+        <div class="alert alert-success">
+            Election is Active: {{ election.start_time.strftime('%Y-%m-%d %H:%M') }} to {{ election.end_time.strftime('%Y-%m-%d %H:%M') }}
+        </div>
+    {% else %}
+        <div class="alert alert-warning">
+            No Active Election
+        </div>
+    {% endif %}
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Voter</title>
+  <link rel="shortcut icon" href="{{ url_for('static', filename='icon/icon.ico') }}" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(to right, #0f0f0f, #1c1c1c);
+      color: #f1f1f1;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding: 40px;
+    }
+
+    .form-container {
+      background-color: #2a2a2a;
+      border-radius: 10px;
+      padding: 40px;
+      max-width: 800px;
+      margin: auto;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-weight: 600;
+      color: #ffcc00;
+    }
+
+    .form-label {
+      font-weight: 500;
+      color: #cccccc;
+    }
+
+    .form-control,
+    .form-select {
+      background-color: #1f1f1f;
+      color: #f1f1f1;
+      border: 1px solid #555;
+    }
+
+    .form-control:focus {
+      background-color: #1f1f1f;
+      color: #fff;
+      border-color: #ffcc00;
+      box-shadow: 0 0 5px #ffcc00;
+    }
+
+    .form-check-input {
+      background-color: #333;
+      border: 1px solid #777;
+    }
+
+    .form-check-label {
+      margin-right: 20px;
+    }
+
+    .btn-primary {
+      background-color: #ffcc00;
+      border-color: #ffcc00;
+      color: #000;
+      font-weight: bold;
+    }
+
+    .btn-primary:hover {
+      background-color: #e6b800;
+      border-color: #e6b800;
+    }
+
+    .img-preview {
+      display: block;
+      margin-top: 10px;
+      height: 100px;
+      border-radius: 5px;
+      border: 2px solid #444;
+    }
+
+    @media (max-width: 768px) {
+      .form-container {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Edit Voter</h2>
+    <form action="{{ url_for('edit_voter', id=voter.id) }}" method="post" enctype="multipart/form-data">
+      <div class="mb-3">
+        <label class="form-label">Name</label>
+        <input type="text" name="name" value="{{ voter.name }}" class="form-control" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Username</label>
+        <input type="text" name="username" value="{{ voter.username }}" class="form-control" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Date of Birth</label>
+        <input type="date" name="dob" value="{{ voter.dob }}" class="form-control" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Age</label>
+        <input type="text" name="age" value="{{ voter.age }}" class="form-control" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input type="text" name="email" value="{{ voter.email }}" class="form-control" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Phone Number</label>
+        <input type="text" name="phone_no" value="{{ voter.phone_no }}" class="form-control" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Password</label>
+        <input type="text" name="password" value="{{ voter.password }}" class="form-control">
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Address Line 1</label>
+        <input type="text" name="address_lane1" value="{{ voter.address_lane1 }}" class="form-control" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Address Line 2</label>
+        <input type="text" name="address_lane2" value="{{ voter.address_lane2 }}" class="form-control" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">District</label>
+        <input type="text" name="district" value="{{ voter.district }}" class="form-control" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">State</label>
+        <input type="text" name="state" value="{{ voter.state }}" class="form-control" required>
+      </div>
+
+      <div class="mb-4">
+        <label class="form-label d-block">Gender</label>
+        <div class="form-check form-check-inline">
+          <input type="radio" name="gender" id="dot-1" value="Male" class="form-check-input" {% if voter.gender == 'Male' %}checked{% endif %}>
+          <label class="form-check-label" for="dot-1">Male</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" name="gender" id="dot-2" value="Female" class="form-check-input" {% if voter.gender == 'Female' %}checked{% endif %}>
+          <label class="form-check-label" for="dot-2">Female</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" name="gender" id="dot-3" value="Other" class="form-check-input" {% if voter.gender == 'Other' %}checked{% endif %}>
+          <label class="form-check-label" for="dot-3">Prefer not to say</label>
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <label class="form-label">Upload New Photo</label>
+        <input type="file" name="photo" class="form-control">
+        <img src="{{ url_for('static', filename='uploads/' + voter.photo) }}" alt="Current Photo" class="img-preview">
+      </div>
+
+      <div class="text-center">
+        <input type="submit" value="Update Voter" class="btn btn-primary">
+      </div>
+    </form>
+  </div>
+</body>
+</html>

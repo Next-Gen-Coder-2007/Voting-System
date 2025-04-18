@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Candidate</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='icon/icon.ico') }}" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #101010; /* Dark background for Ghost of Tsushima vibe */
+            color: #f1f1f1; /* Light text for readability */
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            background-color: #1e1e1e; /* Dark grey container */
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+            background-image: url('https://path-to-your-ghost-of-tsushima-bg.jpg'); /* Optional Ghost of Tsushima-inspired background */
+            background-size: cover;
+            background-position: center;
+        }
+        h2 {
+            color: #dcdcdc;
+            font-weight: bold;
+            font-size: 2.5rem;
+            text-align: center;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+            margin-bottom: 30px;
+        }
+        .form-label {
+            color: #c0c0c0; /* Light gray labels */
+            font-weight: 600;
+        }
+        .form-control {
+            background-color: #333333;
+            color: #f1f1f1;
+            border: 1px solid #555;
+            border-radius: 5px;
+            padding: 12px;
+        }
+        .form-control:focus {
+            background-color: #444444;
+            color: #dcdcdc;
+            border-color: #e63946; /* Deep red to highlight */
+            box-shadow: 0 0 0 0.2rem rgba(230, 57, 60, 0.25);
+        }
+        .btn {
+            border-radius: 5px;
+            font-weight: bold;
+            padding: 12px 24px;
+            text-transform: uppercase;
+        }
+        .btn-primary {
+            background-color: #e63946; /* A strong red for bold action */
+            border-color: #e63946;
+            color: #fff;
+        }
+        .btn-primary:hover {
+            background-color: #d62828;
+            border-color: #d62828;
+        }
+        .btn-secondary {
+            background-color: #6c757d; /* Muted gray for secondary action */
+            border-color: #6c757d;
+            color: #fff;
+        }
+        .btn-secondary:hover {
+            background-color: #5a6268;
+            border-color: #4e555b;
+        }
+        .form-control, .btn {
+            transition: all 0.3s ease;
+        }
+
+        /* Optional: Hover effect for form input fields */
+        .form-control:hover {
+            border-color: #e63946;
+        }
+
+        /* Optional: Focus animation for form fields */
+        .form-control:focus {
+            outline: none;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+    </style>
+</head>
+<body class="container mt-5">
+    <h2>Edit Candidate</h2>
+    <form method="POST" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="name" class="form-label">Candidate Name</label>
+            <input type="text" class="form-control" id="name" name="name" value="{{ candidate.name }}">
+        </div>
+        <div class="mb-3">
+            <label for="party" class="form-label">Party Name</label>
+            <input type="text" class="form-control" id="party" name="party" value="{{ candidate.party }}">
+        </div>
+        <div class="mb-3">
+            <label for="photo" class="form-label">Candidate Photo (leave blank to keep current)</label>
+            <input type="file" class="form-control" id="photo" name="photo">
+        </div>
+        <button type="submit" class="btn btn-primary">Update Candidate</button>
+        <a href="{{ url_for('admin_dashboard') }}" class="btn btn-secondary">Cancel</a>
+    </form>
+</body>
+</html>

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Responsive Registration Form | CodingLab </title>
+  <link rel="shortcut icon" href="{{ url_for('static', filename='icon/icon.ico') }}" type="image/x-icon">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+  
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+  
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+      background: linear-gradient(135deg, #1e1e2f, #121212);
+      color: #f1f1f1;
+      transform: scale(0.8);
+    }
+  
+    .container {
+      max-width: 800px;
+      width: 100%;
+      background: #222;
+      padding: 25px 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+    }
+  
+    .container .title {
+      font-size: 25px;
+      font-weight: 600;
+      color: #f1f1f1;
+      margin-bottom: 20px;
+      position: relative;
+    }
+  
+    .container .title::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      height: 3px;
+      width: 35px;
+      background: linear-gradient(135deg, #e91e63, #9c27b0);
+      border-radius: 5px;
+    }
+  
+    .content form .user-details {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+  
+    .input-box {
+      width: calc(50% - 20px);
+      margin-bottom: 15px;
+    }
+  
+    .input-box span.details {
+      font-weight: 500;
+      display: block;
+      margin-bottom: 5px;
+      color: #ccc;
+    }
+  
+    .input-box input {
+      height: 45px;
+      width: 100%;
+      padding-left: 15px;
+      border: 1px solid #444;
+      background-color: #111;
+      color: #eee;
+      border-radius: 5px;
+      font-size: 16px;
+      transition: 0.3s ease;
+    }
+  
+    .input-box input:focus {
+      border-color: #9c27b0;
+      outline: none;
+    }
+  
+    .gender-details {
+      margin: 20px 0;
+    }
+  
+    .gender-title {
+      font-size: 18px;
+      font-weight: 500;
+      color: #ccc;
+    }
+  
+    .category {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 10px;
+    }
+  
+    .category label {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      color: #ccc;
+    }
+  
+    .dot {
+      height: 18px;
+      width: 18px;
+      border-radius: 50%;
+      margin-right: 10px;
+      background: #333;
+      border: 4px solid transparent;
+    }
+  
+    #dot-1:checked ~ .category label .one,
+    #dot-2:checked ~ .category label .two,
+    #dot-3:checked ~ .category label .three {
+      background: #9c27b0;
+      border-color: #fff;
+    }
+  
+    form input[type="radio"] {
+      display: none;
+    }
+  
+    .input-box2 {
+      margin: 15px 0;
+    }
+  
+    .input-box2 span.details {
+      font-weight: 500;
+      color: #ccc;
+      display: block;
+      margin-bottom: 5px;
+    }
+  
+    .input-box2 input[type="file"] {
+      width: 100%;
+      padding: 8px;
+      background: #111;
+      color: #eee;
+      border: 1px solid #444;
+      border-radius: 5px;
+    }
+  
+    .button {
+      margin-top: 20px;
+    }
+  
+    .button input {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 5px;
+      color: #fff;
+      font-size: 18px;
+      background: linear-gradient(to right, #e91e63, #9c27b0);
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+  
+    .button input:hover {
+      background: linear-gradient(to left, #e91e63, #9c27b0);
+    }
+  
+    @media(max-width: 584px) {
+      .input-box {
+        width: 100%;
+      }
+  
+      .category {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+  
+</head>
+<body>
+  <div class="container">
+    <!-- Title section -->
+    <div class="title">New Voter</div>
+    <div class="content">
+      <!-- Registration form -->
+      <form action="{{ url_for('add_voter') }}" method="post" enctype="multipart/form-data">
+        <div class="user-details">
+          <!-- Input for Full Name -->
+          <div class="input-box">
+            <span class="details">Full Name</span>
+            <input type="text" placeholder="Enter your name" required name="name" id="name">
+          </div>
+          <!-- Input for Username -->
+          <div class="input-box">
+            <span class="details">Username</span>
+            <input type="text" placeholder="Enter your username" required id="username" name="username">
+          </div>
+          <!-- Input for Date of Birth -->
+          <div class="input-box">
+            <span class="details">Date of Birth</span>
+            <input type="date" required id="dob" name="dob" >
+          </div>
+          <!-- Input for Age -->
+          <div class="input-box">
+            <span class="details">Age</span>
+            <input type="text" required id="age" name="age" >
+          </div>
+          <!-- Input for Email -->
+          <div class="input-box">
+            <span class="details">Email</span>
+            <input type="text" placeholder="Enter your email" required id="email" name="email">
+          </div>
+          <!-- Input for Phone Number -->
+          <div class="input-box">
+            <span class="details">Phone Number</span>
+            <input type="text" placeholder="Enter your number" required name="phone_no" id="phone_no">
+          </div>
+          <!-- Input for Password -->
+          <div class="input-box">
+            <span class="details">Password</span>
+            <input type="text" placeholder="Enter your password" required name="password" id="password">
+          </div>
+          <!-- Input for Confirm Password -->
+          <div class="input-box">
+            <span class="details">Confirm Password</span>
+            <input type="text" placeholder="Confirm your password" required>
+          </div>
+          <!-- Input for Address Lane1 -->
+          <div class="input-box">
+            <span class="details">Address 1</span>
+            <input type="text" id="address_lane1" name="address_lane1" required>
+          </div>
+          <!-- Input for Address Lane2-->
+          <div class="input-box">
+            <span class="details">Address 2</span>
+            <input type="text" id="address_lane2" name="address_lane2" required>
+          </div>
+          <!-- Input for District -->
+          <div class="input-box">
+            <span class="details">District</span>
+            <input type="text" required id="district" name="district" >
+          </div>
+          <!-- Input for State-->
+          <div class="input-box">
+            <span class="details">State</span>
+            <input type="text" id="state" name="state" required>
+          </div>
+        </div>
+        <div class="gender-details">
+          <!-- Radio buttons for gender selection -->
+          <input type="radio" name="gender" id="dot-1" value="Male">
+          <input type="radio" name="gender" id="dot-2" value="Female">
+          <input type="radio" name="gender" id="dot-3" value="Other">
+          <span class="gender-title">Gender</span>
+          <div class="category">
+            <!-- Label for Male -->
+            <label for="dot-1">
+              <span class="dot one"></span>
+              <span class="gender">Male</span>
+            </label>
+            <!-- Label for Female -->
+            <label for="dot-2">
+              <span class="dot two"></span>
+              <span class="gender">Female</span>
+            </label>
+            <!-- Label for Prefer not to say -->
+            <label for="dot-3">
+              <span class="dot three"></span>
+              <span class="gender">Prefer not to say</span>
+            </label>
+          </div>
+        </div>
+        <!-- Input for State-->
+        <div class="input-box2">
+          <span class="details">Upload your Photo</span>
+          <input type="file" id="photo" name="photo" required>
+        </div>
+        <!-- Submit button -->
+        <div class="button">
+          <input type="submit" value="Add">
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
