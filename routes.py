@@ -1,7 +1,6 @@
 from flask import render_template, request, redirect, url_for, session, flash, send_from_directory
 from werkzeug.utils import secure_filename
 import os
-import pandas as pd
 from datetime import datetime, date
 from faker import Faker
 from flask import Flask
